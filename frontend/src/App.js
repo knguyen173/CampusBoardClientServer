@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Register from './components/Register';
+import Login from './components/Login';
+import NotesList from './components/NotesList';
+import TasksList from './components/TasksList';
+import './App.css';
 
-function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api')
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>Campus Board</h1>
-      <p>{message}</p>
-    </div>
-  );
+const App = () => {
+    return (
+        <Router>
+            <div className="container">
+                <h1>Campus Board App</h1>
+                <Routes>
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/notes" element={<NotesList />} />
+                    <Route path="/tasks" element={<TasksList />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
