@@ -14,6 +14,7 @@ exports.getAllNotes = async (req, res) => {
 exports.createNote = async (req, res) => {
     const { user_id, title, content } = req.body;
 
+    console.log("Received note data on backend:", req.body); // Debugging line
     try {
         const result = await pool.query(
             'INSERT INTO notes (user_id, title, content) VALUES ($1, $2, $3) RETURNING *',

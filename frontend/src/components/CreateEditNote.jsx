@@ -1,16 +1,26 @@
+// CreateEditNote.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import axiosInstance from '../api/axiosInstance';
 
 const CreateEditNote = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [note, setNote] = useState('');
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-        console.log({ title, note });
-        navigate('/notes')
+        try {
+            const response = await axiosInstance.post('/notes', {
+                user_id: 1, // Replace with the actual user ID
+                title: title,
+                content: note
+            });
+            console.log('Note saved:', response.data);
+            navigate('/notes');
+        } catch (error) {
+            console.error('Failed to save note:', error);
+        }
     };
 
     const handleExit = () => {
@@ -23,15 +33,13 @@ const CreateEditNote = () => {
             <form onSubmit={handleSave}>
                 <label>Title:</label>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                
-                <label>Note:</label>
-                <textarea type="text" value={note} onChange={(e) => setNote(e.target.value)} />
+
+                <label>Content:</label>
+                <textarea value={note} onChange={(e) => setNote(e.target.value)} />
 
                 <button type="submit">Save</button>
             </form>
-
-            <button class="button-7" onClick={handleExit} >exit</button>
-
+            <button onClick={handleExit}>Exit</button>
         </div>
     );
 };

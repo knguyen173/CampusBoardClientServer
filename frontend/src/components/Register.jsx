@@ -31,7 +31,7 @@ const Register = () => {
 
                 <button type="submit">Register</button>
             </form>
-            <button class="button-7" onClick={loginReturn}>Return to login</button>
+            <button class="button-7" onClick={loginReturn}>Log In</button>
         </div>
     );
 };
