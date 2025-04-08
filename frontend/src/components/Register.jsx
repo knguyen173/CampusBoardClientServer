@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 const Register = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -8,7 +10,11 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ username, password, email });
+        navigate('/login')
     };
+    const loginReturn = () => {
+        navigate('/login')
+    }
 
     return (
         <div className="form-container">
@@ -25,6 +31,7 @@ const Register = () => {
 
                 <button type="submit">Register</button>
             </form>
+            <button class="button-7" onClick={loginReturn}>Return to login</button>
         </div>
     );
 };

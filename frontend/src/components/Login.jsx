@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 const Login = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ username, password });
+        // add auth check here
+        navigate('/dashboard')
+    };
+    const handleRegister = () => {
+        navigate('/register');
     };
 
     return (
@@ -21,6 +28,9 @@ const Login = () => {
 
                 <button type="submit">Login</button>
             </form>
+            
+<button class="button-7" onClick={handleRegister} >register</button>
+
         </div>
     );
 };
