@@ -1,8 +1,14 @@
 import axiosInstance from './axiosInstance';
 
 export const getAllTasks = async () => {
-    const response = await axiosInstance.get('/tasks');
-    return response.data;
+    try {
+        const response = await axiosInstance.get('/tasks');
+        console.log("Tasks from backend:", response.data); // Debugging line
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+        return [];
+    }
 };
 
 export const createTask = async (taskData) => {
