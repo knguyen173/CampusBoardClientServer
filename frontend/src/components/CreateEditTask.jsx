@@ -1,6 +1,9 @@
+// CreateEditTask.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
 
 const CreateEditTask = () => {
@@ -10,6 +13,7 @@ const CreateEditTask = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('Low');
+    const [dateAndTime, setDateAndTime] = useState(new Date());
 
     useEffect(() => {
         const fetchTask = async () => {
@@ -21,6 +25,8 @@ const CreateEditTask = () => {
                         setTitle(taskToEdit.title);
                         setDescription(taskToEdit.description);
                         setPriority(taskToEdit.priority);
+                        setDateAndTime(taskToEdit.dateandtime ? new Date(taskToEdit.dateandtime) : new Date());
+
                     }
                 } catch (error) {
                     console.error('Failed to load task:', error);
@@ -36,19 +42,19 @@ const CreateEditTask = () => {
 
         try {
             if (id) {
-                // Edit existing task
                 await axiosInstance.put(`/tasks/${id}`, {
                     title,
                     description,
-                    priority
+                    priority,
+                    dateAndTime
                 });
             } else {
-                // Create new task
                 await axiosInstance.post('/tasks', {
-                    user_id: 1, // Replace with actual user_id if dynamic
+                    user_id: 1, // Replace with actual user_id 
                     title,
                     description,
-                    priority
+                    priority,
+                    dateAndTime
                 });
             }
 
@@ -85,6 +91,17 @@ const CreateEditTask = () => {
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
                 </select>
+
+                <label>Date and Time:</label>
+                <DatePicker
+                    selected={dateAndTime}
+                    onChange={(date) => setDateAndTime(date)}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                />
 
                 <button type="submit">Save</button>
                 <button type="button" onClick={handleExit}>Exit</button>
