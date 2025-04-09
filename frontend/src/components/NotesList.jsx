@@ -1,3 +1,4 @@
+// NotesList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
@@ -10,7 +11,6 @@ const NotesList = () => {
         const fetchNotes = async () => {
             try {
                 const response = await axiosInstance.get('/notes');
-                console.log("Fetched notes:", response.data);
                 setNotes(response.data);
             } catch (error) {
                 console.error('Failed to fetch notes:', error);
@@ -37,6 +37,10 @@ const NotesList = () => {
         }
     };
 
+    const handleEdit = (id) => {
+        navigate(`/editNote/${id}`);
+    };
+
     return (
         <div className="content-container">
             <h2>Your Notes</h2>
@@ -45,6 +49,7 @@ const NotesList = () => {
                 <div key={note.id} className="note">
                     <h3>{note.title}</h3>
                     <p>{note.content}</p>
+                    <button onClick={() => handleEdit(note.id)}>Edit</button>
                     <button onClick={() => handleDelete(note.id)}>Delete</button>
                 </div>
             ))}

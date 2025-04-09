@@ -1,28 +1,57 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import DateTimePickerComponent from './DateTimePicker';
-import axiosInstance from '../api/axiosInstance';  // Make sure this path is correct
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../api/axiosInstance';
 import '../App.css';
 
 const CreateEditTask = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('Low');
-    const [dateAndTime, setDateAndTime] = useState(new Date());
+
+    useEffect(() => {
+        const fetchTask = async () => {
+            if (id) {
+                try {
+                    const response = await axiosInstance.get('/tasks');
+                    const taskToEdit = response.data.find(task => task.id === parseInt(id));
+                    if (taskToEdit) {
+                        setTitle(taskToEdit.title);
+                        setDescription(taskToEdit.description);
+                        setPriority(taskToEdit.priority);
+                    }
+                } catch (error) {
+                    console.error('Failed to load task:', error);
+                }
+            }
+        };
+
+        fetchTask();
+    }, [id]);
 
     const handleSave = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axiosInstance.post('/tasks', {
-                user_id: 1,  // Replace with the actual user ID
-                title: title,
-                description: description,
-                priority: priority,
-                dateAndTime: dateAndTime
-            });
-            console.log('Task saved:', response.data);
+            if (id) {
+                // Edit existing task
+                await axiosInstance.put(`/tasks/${id}`, {
+                    title,
+                    description,
+                    priority
+                });
+            } else {
+                // Create new task
+                await axiosInstance.post('/tasks', {
+                    user_id: 1, // Replace with actual user_id if dynamic
+                    title,
+                    description,
+                    priority
+                });
+            }
+
             navigate('/tasks');
         } catch (error) {
             console.error('Failed to save task:', error);
@@ -35,13 +64,20 @@ const CreateEditTask = () => {
 
     return (
         <div className="form-container">
-            <h2>Create New Task</h2>
+            <h2>{id ? 'Edit Task' : 'Create New Task'}</h2>
             <form onSubmit={handleSave}>
                 <label>Task:</label>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
 
                 <label>Description:</label>
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
 
                 <label>Priority:</label>
                 <select value={priority} onChange={(e) => setPriority(e.target.value)}>
@@ -50,13 +86,9 @@ const CreateEditTask = () => {
                     <option value="High">High</option>
                 </select>
 
-                <label>Date and Time:</label>
-                <DateTimePickerComponent selectedDate={dateAndTime} onChange={setDateAndTime} />
-
                 <button type="submit">Save</button>
+                <button type="button" onClick={handleExit}>Exit</button>
             </form>
-            
-            <button className="button-7" onClick={handleExit}>Exit</button>
         </div>
     );
 };

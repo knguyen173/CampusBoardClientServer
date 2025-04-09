@@ -10,15 +10,13 @@ const TasksList = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                console.log("Fetching tasks..."); // Log that the fetch attempt is being made
-                const tasksData = await getAllTasks();
-                console.log("Tasks received from backend:", tasksData); // Log the received data
-                setTasks(tasksData); // Ensure state is being set correctly
+                const response = await getAllTasks();
+                setTasks(response);
             } catch (error) {
                 console.error('Failed to fetch tasks:', error);
             }
         };
-    
+
         fetchTasks();
     }, []);
 
@@ -39,24 +37,25 @@ const TasksList = () => {
         }
     };
 
+    const handleEdit = (id) => {
+        navigate(`/editTask/${id}`);
+    };
+
     return (
         <div className="content-container">
             <h2>Your Tasks</h2>
             <button onClick={toDashboard}>Return To Dashboard</button>
             <button onClick={addTask}>Add Task</button>
             <div>
-                {tasks.length === 0 ? (
-                    <p>No tasks found. Add a task to get started.</p>
-                ) : (
-                    tasks.map(task => (
-                        <div key={task.id} className="task">
-                            <h3>{task.title}</h3>
-                            <p>{task.description}</p>
-                            <p>Priority: {task.priority}</p>
-                            <button onClick={() => handleDelete(task.id)}>Delete</button>
-                        </div>
-                    ))
-                )}
+                {tasks.map(task => (
+                    <div key={task.id} className="task">
+                        <h3>{task.title}</h3>
+                        <p>{task.description}</p>
+                        <p>Priority: {task.priority}</p>
+                        <button onClick={() => handleEdit(task.id)}>Edit</button>
+                        <button onClick={() => handleDelete(task.id)}>Delete</button>
+                    </div>
+                ))}
             </div>
         </div>
     );
