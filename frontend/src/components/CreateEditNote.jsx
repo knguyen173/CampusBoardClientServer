@@ -33,6 +33,7 @@ const CreateEditNote = () => {
         try {
             if (id) {
                 // Update existing note
+                console.log("UPdate note with:", {title, content:note});
                 await axiosInstance.put(`/notes/${id}`, {
                     title,
                     content: note

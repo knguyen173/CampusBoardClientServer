@@ -30,18 +30,26 @@ exports.createTask = async (req, res) => {
 
 // Update Task
 exports.updateTask = async (req, res) => {
-  const { id } = req.params;
+  const { id }  = req.params;
   const { title, description, priority, status } = req.body;
+  console.log("Received tasks! data on backend:", req.body); // Debugging line
 
   try {
-      const result = await pool.query(
-          'UPDATE tasks SET title = $1, description = $2, priority = $3, status = $4, updated_at = NOW() WHERE id = $5 RETURNING *',
-          [title, description, priority, status, id]
-      );
 
-      if (result.rows.length === 0) {
-          return res.status(404).json({ error: "Task not found" });
-      }
+      const result = await pool.query(
+          'UPDATE tasks SET title = $1, description = $2, priority = $3 WHERE id = $4',
+          [title, description, priority, id]
+      );
+      console.log("ID:", id);
+      console.log("TITLE:", title);
+      console.log("Descript:", description);
+      console.log("Prio:", priority);
+      console.log("rows updated:", result.rowCount);
+      console.log("result:", result.rows);
+
+    //   if (result.rows.length === 0) {
+    //       return res.status(404).json({ error: "Task not found" });
+    //   }
 
       res.json(result.rows[0]);
   } catch (error) {
