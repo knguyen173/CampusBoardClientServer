@@ -44,16 +44,16 @@ const TasksList = () => {
     return (
         <div className="content-container">
             <h2>Your Tasks</h2>
-            <button onClick={toDashboard}>Return To Dashboard</button>
-            <button onClick={addTask}>Add Task</button>
+            <button onClick={toDashboard} class="button-7">Return To Dashboard</button>
+            <button onClick={addTask} class="button-7">Add Task</button>
             <div>
                 {tasks.map(task => (
                     <div key={task.id} className="task">
                         <h3>{task.title}</h3>
                         <p>{task.description}</p>
                         <p>Priority: {task.priority}</p>
-                        <button onClick={() => handleEdit(task.id)}>Edit</button>
-                        <button onClick={() => handleDelete(task.id)}>Delete</button>
+                        <button onClick={() => handleEdit(task.id)} class="button-7">Edit</button>
+                        <button onClick={() => handleDelete(task.id)} class="button-7">Delete</button>
                     </div>
                 ))}
             </div>

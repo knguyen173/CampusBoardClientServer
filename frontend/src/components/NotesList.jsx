@@ -44,16 +44,16 @@ const NotesList = () => {
     return (
         <div className="content-container">
             <h2>Your Notes</h2>
-            <button onClick={toDashboard}>Return To Dashboard</button>
+            <button onClick={toDashboard} class="button-7">Return To Dashboard</button>
             {notes.map((note) => (
                 <div key={note.id} className="note">
                     <h3>{note.title}</h3>
                     <p>{note.content}</p>
-                    <button onClick={() => handleEdit(note.id)}>Edit</button>
-                    <button onClick={() => handleDelete(note.id)}>Delete</button>
+                    <button onClick={() => handleEdit(note.id)} class="button-7">Edit</button>
+                    <button onClick={() => handleDelete(note.id)} class="button-7">Delete</button>
                 </div>
             ))}
-            <button onClick={addNote}>Add Note</button>
+            <button onClick={addNote} class="button-7">Add Note</button>
         </div>
     );
 };
