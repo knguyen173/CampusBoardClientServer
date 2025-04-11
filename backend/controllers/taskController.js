@@ -14,12 +14,12 @@ exports.getAllTasks = async (req, res) => {
 
 // Create Task
 exports.createTask = async (req, res) => {
-    const { user_id, title, description, priority } = req.body;
-
+    const { user_id, title, description, priority, due_date} = req.body;
+    console.log("Creating new Task:", req.body);
     try {
         const result = await pool.query(
-            'INSERT INTO tasks (user_id, title, description, priority) VALUES ($1, $2, $3, $4) RETURNING *',
-            [user_id, title, description, priority]
+            'INSERT INTO tasks (user_id, title, description, priority, due_date) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [user_id, title, description, priority, due_date]
         );
 
         res.status(201).json(result.rows[0]);
@@ -31,21 +31,15 @@ exports.createTask = async (req, res) => {
 // Update Task
 exports.updateTask = async (req, res) => {
   const { id }  = req.params;
-  const { title, description, priority, status } = req.body;
+  const { title, description, priority, due_date } = req.body;
   console.log("Received tasks! data on backend:", req.body); // Debugging line
 
   try {
 
       const result = await pool.query(
-          'UPDATE tasks SET title = $1, description = $2, priority = $3 WHERE id = $4',
-          [title, description, priority, id]
+          'UPDATE tasks SET title = $1, description = $2, priority = $3, due_date = $4 WHERE id = $5',
+          [title, description, priority, due_date, id]
       );
-      console.log("ID:", id);
-      console.log("TITLE:", title);
-      console.log("Descript:", description);
-      console.log("Prio:", priority);
-      console.log("rows updated:", result.rowCount);
-      console.log("result:", result.rows);
 
     //   if (result.rows.length === 0) {
     //       return res.status(404).json({ error: "Task not found" });

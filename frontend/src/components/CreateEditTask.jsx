@@ -13,7 +13,7 @@ const CreateEditTask = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('Low');
-    const [dateAndTime, setDateAndTime] = useState(new Date());
+    const [dueDate, setDueDate] = useState(new Date());
 
     useEffect(() => {
         const fetchTask = async () => {
@@ -25,8 +25,7 @@ const CreateEditTask = () => {
                         setTitle(taskToEdit.title);
                         setDescription(taskToEdit.description);
                         setPriority(taskToEdit.priority);
-                        setDateAndTime(taskToEdit.dateandtime ? new Date(taskToEdit.dateandtime) : new Date());
-
+                        setDueDate(new Date(taskToEdit.due_date));
                     }
                 } catch (error) {
                     console.error('Failed to load task:', error);
@@ -46,7 +45,7 @@ const CreateEditTask = () => {
                     title,
                     description,
                     priority,
-                    dateAndTime
+                    due_date: dueDate
                 });
             } else {
                 await axiosInstance.post('/tasks', {
@@ -54,7 +53,7 @@ const CreateEditTask = () => {
                     title,
                     description,
                     priority,
-                    dateAndTime
+                    due_date: dueDate
                 });
             }
 
@@ -94,8 +93,8 @@ const CreateEditTask = () => {
 
                 <label>Date and Time:</label>
                 <DatePicker
-                    selected={dateAndTime}
-                    onChange={(date) => setDateAndTime(date)}
+                    selected={dueDate}
+                    onChange={(date) => setDueDate(date)}
                     showTimeSelect
                     timeFormat="HH:mm"
                     timeIntervals={15}
