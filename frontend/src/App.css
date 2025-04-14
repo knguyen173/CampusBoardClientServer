@@ -12,7 +12,7 @@ body {
     width: 80%;
     margin: auto;
     padding: 20px;
-    background: #5f848b;  /* Pale teal background for content */
+    background: #587b81;  /* Pale teal background for content */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -20,7 +20,7 @@ body {
 /* Heading styles for Login and Home pages */
 h1, h2 {
     text-align: center;
-    color: #fbc531;  /* Pale yellow for headers */
+    color: #ffe08b;  /* Pale yellow for headers */
     font-size: 2rem;
 }
 
@@ -28,7 +28,7 @@ h1, h2 {
 .form-container, .content-container {
     margin: 20px;
     padding: 20px;
-    background: #1d3c3f;  /* Teal for form containers */
+    background: #1d3c3f;  /* Pale teal for form containers */
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -41,7 +41,7 @@ form {
 
 form label {
     margin-bottom: 5px;
-    color: #fbc531;  /* Pale yellow for labels */
+    color: #ffe08b;  /* Pale yellow for labels */
 }
 
 form input, form button, form textarea {
@@ -56,7 +56,7 @@ form input {
 }
 
 form button {
-    background-color: #fbc531;  /* Pale yellow accent for buttons */
+    background-color: #ffe08b;  /* Pale yellow accent for buttons */
     color: #333333;
     cursor: pointer;
     font-weight: bold;
@@ -69,7 +69,7 @@ form button:hover {
 
 /* Button styling */
 .button-7 {
-    background-color: #fbc531;  /* Pale yellow accent */
+    background-color: #ffe08b;  /* Pale yellow accent */
     color: #333333;
     border: 1px solid transparent;
     border-radius: 4px;
