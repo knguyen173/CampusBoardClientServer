@@ -1,32 +1,39 @@
+/* Global styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1d3c3f !important;  /* Dark teal background */
+    color: white;
     margin: 0;
     padding: 0;
 }
 
+/* Container for the whole page */
 .container {
     width: 80%;
     margin: auto;
     padding: 20px;
-    background: white;
+    background: #5f848b;  /* Pale teal background for content */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Heading styles for Login and Home pages */
 h1, h2 {
     text-align: center;
-    color: #333;
+    color: #fbc531;  /* Pale yellow for headers */
+    font-size: 2rem;
 }
 
+/* Login form container */
 .form-container, .content-container {
     margin: 20px;
     padding: 20px;
-    background: white;
+    background: #1d3c3f;  /* Teal for form containers */
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Form styling */
 form {
     display: flex;
     flex-direction: column;
@@ -34,84 +41,117 @@ form {
 
 form label {
     margin-bottom: 5px;
+    color: #fbc531;  /* Pale yellow for labels */
+}
+
+form input, form button, form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
 }
 
 form input {
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: #f9f9f9;  /* Light background for input fields */
 }
 
 form button {
+    background-color: #fbc531;  /* Pale yellow accent for buttons */
+    color: #333333;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+form button:hover {
+    background-color: #f7b731;  /* Slightly darker yellow for hover effect */
+}
+
+/* Button styling */
+.button-7 {
+    background-color: #fbc531;  /* Pale yellow accent */
+    color: #333333;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     padding: 10px;
-    background-color: #4CAF50;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-7:hover {
+    background-color: #f7b731;  /* Darker yellow for hover effect */
+}
+
+.button-7:active {
+    background-color: #f39c12;  /* Even darker yellow for active state */
+}
+
+/* Note and task item styling */
+.note, .task {
+    background-color: #ffffff;  /* White background for notes/tasks */
+    color: #2a4d53;  /* Dark teal text for notes */
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Textarea styling */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    background-color: #f8f8f8;  /* Light background for text areas */
+    font-size: 16px;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    resize: none;
+}
+
+/* Custom modal styling for new note creation */
+.modal {
+    background-color: #A7C4C9;  /* Pale teal for modal */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    width: 400px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.modal input, .modal textarea {
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.modal button {
+    background-color: #fbc531;
     color: white;
+    padding: 10px;
+    font-weight: bold;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-form button:hover {
-    background-color: #45a049;
+.modal button:hover {
+    background-color: #f7b731;
 }
 
-.note, .task {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+/* Header for login page and home page */
+.login-header, .home-header {
+    font-size: 2rem;
+    color: #fbc531;  /* Pale yellow for header text */
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #1d3c3f;  /* Dark teal background for header */
+    padding: 10px 0;
 }
-
- 
-.button-7 {
-  background-color: #0095ff;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.15385;
-  margin: 0;
-  outline: none;
-  padding: 8px .8em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
-}
-
-.button-7:hover,
-.button-7:focus {
-  background-color: #07c;
-}
-
-.button-7:focus {
-  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
-}
-
-.button-7:active {
-  background-color: #0064bd;
-  box-shadow: none;
-}
-
-textarea {
-    width: 100%;
-    height: 150px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
-  }
